@@ -1,0 +1,7 @@
+{
+  "name": "Copy of WhatsaLink",
+  "description": "Instantly start WhatsApp chats with unsaved numbers. Features AI-powered number extraction from messy text.",
+  "requestFramePermissions": [
+    "clipboard-read"
+  ]
+}

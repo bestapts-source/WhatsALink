@@ -1,0 +1,20 @@
+{
+  "short_name": "WhatsaLink",
+  "name": "WhatsaLink Direct Chat",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#00a884",
+  "background_color": "#E5DDD5"
+}
