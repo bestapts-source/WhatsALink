@@ -196,12 +196,29 @@
         };
 
         const handlePaste = async () => {
+          // 1. Try Median.co / GoNative Native Bridge first
+          // This allows getting clipboard content even if WebView permissions are strict
+          if (window.median?.clipboard?.get || window.gonative?.clipboard?.get) {
+             const bridge = window.median?.clipboard || window.gonative?.clipboard;
+             bridge.get((data) => {
+                if (data && data.text) {
+                   onChange(data.text);
+                } else if (onPasteError) {
+                   onPasteError("Clipboard is empty");
+                }
+             });
+             return;
+          }
+
+          // 2. Try Standard Web API
           try {
             const text = await navigator.clipboard.readText();
             if (text) onChange(text);
             else if (onPasteError) onPasteError("Clipboard is empty");
           } catch (err) {
-            if (onPasteError) onPasteError("Please paste manually");
+            console.error("Paste failed", err);
+            // 3. Fallback for restricted WebViews
+            if (onPasteError) onPasteError("Please press & hold input to paste");
           }
         };
 
