@@ -3,6 +3,7 @@ export interface HistoryItem {
   number: string;
   rawText?: string;
   timestamp: number;
+  noWhatsApp?: boolean;
 }
 
 export interface ExtractionResult {

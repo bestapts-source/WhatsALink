@@ -39,6 +39,21 @@ const App: React.FC = () => {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
+    // Register Service Worker for PWA / APK Support
+    if ('serviceWorker' in navigator) {
+      const registerSW = () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => console.log('Service Worker registered with scope:', reg.scope))
+          .catch((err) => console.error('Service Worker registration failed:', err));
+      };
+
+      if (document.readyState === 'complete') {
+        registerSW();
+      } else {
+        window.addEventListener('load', registerSW);
+      }
+    }
+
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     };
@@ -110,6 +125,19 @@ const App: React.FC = () => {
       // We keep the message generic but helpful.
       showNotification("Could not find a valid number or AI unavailable.", 'error');
     }
+  };
+
+  const handleCallNumber = (numberToCall: string) => {
+    window.open(`tel:${numberToCall}`, '_self');
+  };
+
+  const handleToggleNoWhatsApp = (id: string) => {
+    setHistory(prev => prev.map(item => {
+      if (item.id === id) {
+        return { ...item, noWhatsApp: !item.noWhatsApp };
+      }
+      return item;
+    }));
   };
 
   const handleDeleteHistory = (id: string) => {
@@ -241,6 +269,8 @@ const App: React.FC = () => {
         <HistoryList 
           history={history} 
           onSelect={(num) => handleStartChat(num)} 
+          onCall={handleCallNumber}
+          onToggleNoWhatsApp={handleToggleNoWhatsApp}
           onDelete={handleDeleteHistory}
           onClear={handleClearHistory}
         />
