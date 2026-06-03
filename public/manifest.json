@@ -6,19 +6,19 @@
   "categories": ["utilities", "productivity"],
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/192px-WhatsApp.svg.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
@@ -28,21 +28,5 @@
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#00a884",
-  "background_color": "#E5DDD5",
-  "screenshots": [
-    {
-      "src": "/screenshot-narrow.png",
-      "sizes": "768x1376",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Direct chat screen with unsaved contacts"
-    },
-    {
-      "src": "/screenshot-wide.png",
-      "sizes": "1376x768",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Dashboard view"
-    }
-  ]
+  "background_color": "#E5DDD5"
 }
