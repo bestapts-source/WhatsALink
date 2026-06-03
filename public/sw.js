@@ -2,7 +2,11 @@ const CACHE_NAME = 'whatsalink-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/screenshot-narrow.png',
+  '/screenshot-wide.png'
 ];
 
 // Installs and precaches core assets

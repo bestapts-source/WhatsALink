@@ -6,20 +6,22 @@
   "categories": ["utilities", "productivity"],
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
+      "src": "/icon-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
   "start_url": "/",
@@ -29,15 +31,15 @@
   "background_color": "#E5DDD5",
   "screenshots": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
-      "sizes": "1080x1920",
+      "src": "/screenshot-narrow.png",
+      "sizes": "768x1376",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Direct chat screen with unsaved contacts"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/124/124034.png",
-      "sizes": "1920x1080",
+      "src": "/screenshot-wide.png",
+      "sizes": "1376x768",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Dashboard view"
