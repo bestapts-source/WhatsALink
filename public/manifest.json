@@ -1,32 +1,46 @@
 {
-  "id": "/",
+  "id": ".",
   "short_name": "WhatsaLink",
   "name": "WhatsaLink - Direct Chat",
   "description": "Instantly start WhatsApp chats with unsaved numbers without adding them as contacts. Features quick phone calling as fallback and AI-powered extraction.",
   "categories": ["utilities", "productivity"],
   "icons": [
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/192px-WhatsApp.svg.png",
+      "src": "icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#00a884",
-  "background_color": "#E5DDD5"
+  "background_color": "#E5DDD5",
+  "screenshots": [
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "320x640",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "640x320",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
 }

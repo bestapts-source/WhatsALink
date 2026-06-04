@@ -35,6 +35,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   onPasteError
 }) => {
   const [cleanNumber, setCleanNumber] = useState('');
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
   // Strip non-digits for visual validation preview
   useEffect(() => {
@@ -65,8 +66,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
       }
     } catch (err) {
       console.error('Failed to read clipboard:', err);
+      // Automatically focus the text box so the keyboard pops up and they can paste immediately
+      textareaRef.current?.focus();
       if (onPasteError) {
-        onPasteError("Please paste manually (Ctrl+V)");
+        onPasteError("Clipboard is locked. Tap and hold inside the box to Paste manually!");
       }
     }
   };
@@ -98,15 +101,18 @@ const NumberInput: React.FC<NumberInputProps> = ({
              )}
           </div>
 
-          <textarea
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Paste number here (e.g. 0501234567)"
-            className="w-full bg-transparent p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-lg font-medium resize-none"
-            rows={looksLikeMessyText ? 3 : 1}
-            style={{ minHeight: '60px' }}
-          />
+          <div className="cursor-text" onClick={() => textareaRef.current?.focus()}>
+            <textarea
+              ref={textareaRef}
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Paste number here (e.g. 0501234567)"
+              className="w-full bg-transparent p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-sm sm:text-base font-normal resize-none"
+              rows={looksLikeMessyText ? 3 : 1}
+              style={{ minHeight: '60px' }}
+            />
+          </div>
           
           <div className="flex justify-between items-center px-2 pb-2 mt-2">
             

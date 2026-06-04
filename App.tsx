@@ -42,7 +42,7 @@ const App: React.FC = () => {
     // Register Service Worker for PWA / APK Support
     if ('serviceWorker' in navigator) {
       const registerSW = () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('sw.js')
           .then((reg) => console.log('Service Worker registered with scope:', reg.scope))
           .catch((err) => console.error('Service Worker registration failed:', err));
       };

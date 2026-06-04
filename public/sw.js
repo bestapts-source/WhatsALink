@@ -1,14 +1,14 @@
 const CACHE_NAME = 'whatsalink-v2';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/favicon.png',
-  '/favicon.ico',
-  '/screenshot-narrow.png',
-  '/screenshot-wide.png'
+  './',
+  'index.html',
+  'manifest.json',
+  'icon-192.png',
+  'icon-512.png',
+  'favicon.png',
+  'favicon.ico',
+  'screenshot-narrow.png',
+  'screenshot-wide.png'
 ];
 
 // Installs and precaches core assets
@@ -83,7 +83,7 @@ self.addEventListener('fetch', (event) => {
         console.log('[Service Worker] Direct fetch failed, offline:', err);
         // Fallback to index.html if navigating page
         if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
+          return caches.match('index.html');
         }
       });
     })
