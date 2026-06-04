@@ -17,6 +17,10 @@ const App: React.FC = () => {
   const [lastDeleted, setLastDeleted] = useState<HistoryItem | null>(null);
   const [undoTimeout, setUndoTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
+  // Tip box visibility state
+  const [showDirectChatTip, setShowDirectChatTip] = useState(true);
+  const [showSmartPasteTip, setShowSmartPasteTip] = useState(true);
+
   // PWA Install state
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
@@ -30,6 +34,12 @@ const App: React.FC = () => {
         console.error("Failed to parse history", e);
       }
     }
+
+    // Load tips state from cookies & localStorage
+    const hideDirectChat = localStorage.getItem('hide_direct_chat') === 'true' || document.cookie.includes('hide_direct_chat=true');
+    const hideSmartPaste = localStorage.getItem('hide_smart_paste') === 'true' || document.cookie.includes('hide_smart_paste=true');
+    if (hideDirectChat) setShowDirectChatTip(false);
+    if (hideSmartPaste) setShowSmartPasteTip(false);
 
     // PWA Install Prompt Listener
     const handleBeforeInstallPrompt = (e: any) => {
@@ -176,6 +186,18 @@ const App: React.FC = () => {
     }
   };
 
+  const dismissDirectChatTip = () => {
+    setShowDirectChatTip(false);
+    localStorage.setItem('hide_direct_chat', 'true');
+    document.cookie = "hide_direct_chat=true; max-age=31536000; path=/; samesite=lax";
+  };
+
+  const dismissSmartPasteTip = () => {
+    setShowSmartPasteTip(false);
+    localStorage.setItem('hide_smart_paste', 'true');
+    document.cookie = "hide_smart_paste=true; max-age=31536000; path=/; samesite=lax";
+  };
+
   const handleInstallClick = async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
@@ -243,27 +265,49 @@ const App: React.FC = () => {
         )}
 
         {/* Instructions / Tips */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
-           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2">
-              <div className="bg-green-100 w-8 h-8 rounded-full flex items-center justify-center text-green-600 mb-1">
-                <ExternalLink size={16} />
-              </div>
-              <h3 className="font-semibold text-gray-800">Direct Chat</h3>
-              <p className="text-xs text-gray-500">
-                Type a number. Starts with 05? We'll add +972 automatically. Or pick a country code.
-              </p>
-           </div>
-           
-           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2">
-              <div className="bg-purple-100 w-8 h-8 rounded-full flex items-center justify-center text-purple-600 mb-1">
-                 <Info size={16} />
-              </div>
-              <h3 className="font-semibold text-gray-800">Smart Paste</h3>
-              <p className="text-xs text-gray-500">
-                Paste messy text or email signatures. Our AI will extract the number for you.
-              </p>
-           </div>
-        </div>
+        {(showDirectChatTip || showSmartPasteTip) && (
+          <div className={`mt-8 grid gap-4 w-full max-w-lg ${showDirectChatTip && showSmartPasteTip ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+             {showDirectChatTip && (
+               <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2 relative group">
+                  <button 
+                    onClick={dismissDirectChatTip}
+                    className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
+                    title="Hide this tip"
+                    aria-label="Hide this tip"
+                  >
+                    <X size={14} />
+                  </button>
+                  <div className="bg-green-100 w-8 h-8 rounded-full flex items-center justify-center text-green-600 mb-1">
+                    <ExternalLink size={16} />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 pr-5">Direct Chat</h3>
+                  <p className="text-xs text-gray-500 pr-4 leading-relaxed">
+                    Type a number. Starts with 05? We'll add +972 automatically. Or pick a country code.
+                  </p>
+               </div>
+             )}
+             
+             {showSmartPasteTip && (
+               <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2 relative group">
+                  <button 
+                    onClick={dismissSmartPasteTip}
+                    className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
+                    title="Hide this tip"
+                    aria-label="Hide this tip"
+                  >
+                    <X size={14} />
+                  </button>
+                  <div className="bg-purple-100 w-8 h-8 rounded-full flex items-center justify-center text-purple-600 mb-1">
+                     <Info size={16} />
+                  </div>
+                  <h3 className="font-semibold text-gray-800 pr-5">Smart Paste</h3>
+                  <p className="text-xs text-gray-500 pr-4 leading-relaxed">
+                    Paste messy text or email signatures. Our AI will extract the number for you.
+                  </p>
+               </div>
+             )}
+          </div>
+        )}
 
         {/* History Section */}
         <HistoryList 
