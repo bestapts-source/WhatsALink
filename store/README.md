@@ -10,7 +10,7 @@ Keywords woven into the text (Play indexes title, short and full description): W
 Policy reminders: no "#1/best" claims, no emoji spam, no keyword stuffing, and the independence disclaimer stays in every language.
 
 ## Privacy policy
-`privacy-policy.html` — replace `CONTACT_EMAIL`, host it at a public HTTPS URL, and paste that URL in Play Console > App content > Privacy policy.
+`privacy-policy.html` — live at https://whatsalink-privacy.netlify.app/ (Netlify site `whatsalink-privacy`; source copy in `store/_site`, not committed). Paste that URL in Play Console > App content > Privacy policy.
 
 ## Data safety form (answers matching the current app)
 - Does the app collect or share user data? **No**
