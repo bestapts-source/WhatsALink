@@ -3,6 +3,7 @@ import { MessageCircle, ExternalLink, Info, AlertCircle, RotateCcw, X, Download 
 import NumberInput from './components/NumberInput';
 import HistoryList from './components/HistoryList';
 import { HistoryItem } from './types';
+import { t } from './src/i18n';
 import { extractPhoneNumber, formatPhoneNumber } from './utils/phoneUtils';
 
 const App: React.FC = () => {
@@ -90,7 +91,7 @@ const App: React.FC = () => {
     }
     
     if (!formattedNumber) {
-        showNotification("Please enter a valid number.", 'error');
+        showNotification(t('invalidNumber'), 'error');
         return;
     }
 
@@ -125,9 +126,9 @@ const App: React.FC = () => {
     if (result) {
       setCountryCode('');
       setText('+' + result);
-      showNotification("Number extracted successfully!", 'success');
+      showNotification(t('extracted'), 'success');
     } else {
-      showNotification("Could not find a valid number in this text.", 'error');
+      showNotification(t('notFound'), 'error');
     }
   };
 
@@ -174,7 +175,7 @@ const App: React.FC = () => {
   };
 
   const handleClearHistory = () => {
-    if (confirm("Are you sure you want to clear all history?")) {
+    if (confirm(t('confirmClear'))) {
       setHistory([]);
       setLastDeleted(null); // Clear any pending undo when full clear happens
     }
@@ -220,7 +221,7 @@ const App: React.FC = () => {
             <button
               onClick={handleInstallClick}
               className="absolute -right-24 top-2 bg-white text-[#00a884] p-2 rounded-full shadow-lg hover:bg-gray-100 transition-transform hover:scale-110 hidden sm:flex"
-              title="Install App"
+              title={t('install')}
             >
               <Download size={20} />
             </button>
@@ -230,9 +231,9 @@ const App: React.FC = () => {
         {/* Introduction Card */}
         <div className="mb-8 text-center bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-white/50 w-full max-w-md">
           <p className="text-gray-600 text-sm">
-            Chat on WhatsApp without saving contacts.
+            {t('tagline')}
             <br/>
-            <span className="text-xs text-gray-500 font-medium">Works with phone numbers from any country.</span>
+            <span className="text-xs text-gray-500 font-medium">{t('subtitle')}</span>
           </p>
         </div>
 
@@ -264,18 +265,18 @@ const App: React.FC = () => {
                <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2 relative group">
                   <button 
                     onClick={dismissDirectChatTip}
-                    className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
-                    title="Hide this tip"
-                    aria-label="Hide this tip"
+                    className="absolute top-2.5 end-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
+                    title={t('hideTip')}
+                    aria-label={t('hideTip')}
                   >
                     <X size={14} />
                   </button>
                   <div className="bg-green-100 w-8 h-8 rounded-full flex items-center justify-center text-green-600 mb-1">
                     <ExternalLink size={16} />
                   </div>
-                  <h3 className="font-semibold text-gray-800 pr-5">Direct Chat</h3>
-                  <p className="text-xs text-gray-500 pr-4 leading-relaxed">
-                    Type a number with its country code (+44, +1, +972...) or pick a country and type it locally.
+                  <h3 className="font-semibold text-gray-800 pe-5">{t('tipDirectTitle')}</h3>
+                  <p className="text-xs text-gray-500 pe-4 leading-relaxed">
+                    {t('tipDirectBody')}
                   </p>
                </div>
              )}
@@ -284,18 +285,18 @@ const App: React.FC = () => {
                <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-2 relative group">
                   <button 
                     onClick={dismissSmartPasteTip}
-                    className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
-                    title="Hide this tip"
-                    aria-label="Hide this tip"
+                    className="absolute top-2.5 end-2.5 text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
+                    title={t('hideTip')}
+                    aria-label={t('hideTip')}
                   >
                     <X size={14} />
                   </button>
                   <div className="bg-purple-100 w-8 h-8 rounded-full flex items-center justify-center text-purple-600 mb-1">
                      <Info size={16} />
                   </div>
-                  <h3 className="font-semibold text-gray-800 pr-5">Smart Paste</h3>
-                  <p className="text-xs text-gray-500 pr-4 leading-relaxed">
-                    Paste messy text or email signatures. We'll find the number for you.
+                  <h3 className="font-semibold text-gray-800 pe-5">{t('tipPasteTitle')}</h3>
+                  <p className="text-xs text-gray-500 pe-4 leading-relaxed">
+                    {t('tipPasteBody')}
                   </p>
                </div>
              )}
@@ -320,14 +321,14 @@ const App: React.FC = () => {
               className="flex items-center gap-2 px-4 py-2 bg-[#075E54] text-white rounded-lg shadow-md hover:bg-[#064e46] transition-colors text-sm font-medium"
             >
               <Download size={16} />
-              Install App
+              {t('install')}
             </button>
           </div>
         )}
 
         {/* Footer */}
         <div className="mt-12 text-center text-gray-400 text-xs">
-          <p>WhatsaLink is not affiliated with WhatsApp Inc.</p>
+          <p>{t('notAffiliated')}</p>
         </div>
 
       </div>
@@ -335,14 +336,14 @@ const App: React.FC = () => {
       {/* Undo Toast (Fixed at bottom) */}
       {lastDeleted && (
         <div className="fixed bottom-6 z-50 flex items-center gap-3 bg-gray-800 text-white px-4 py-3 rounded-lg shadow-xl transition-all transform animate-in slide-in-from-bottom-2 fade-in duration-300">
-            <span className="text-sm">Chat deleted from history</span>
+            <span className="text-sm">{t('deleted')}</span>
             <div className="h-4 w-px bg-gray-600 mx-1"></div>
             <button 
               onClick={handleUndoDelete}
               className="flex items-center gap-1.5 text-green-400 font-bold hover:text-green-300 text-sm tracking-wide px-2 py-1 rounded hover:bg-white/10 transition-colors"
             >
               <RotateCcw size={14} />
-              UNDO
+              {t('undo')}
             </button>
             <button
               onClick={() => setLastDeleted(null)}

@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './src/index.css';
+import { lang, dir } from './src/i18n';
+
+document.documentElement.lang = lang;
+document.documentElement.dir = dir;
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

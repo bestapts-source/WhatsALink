@@ -1,5 +1,6 @@
 import React from 'react';
 import { HistoryItem } from '../types';
+import { t } from '../src/i18n';
 import { Clock, Trash2, MessageCircle, Phone, PhoneOff } from 'lucide-react';
 
 interface HistoryListProps {
@@ -25,13 +26,13 @@ const HistoryList: React.FC<HistoryListProps> = ({
     <div className="mt-8 w-full max-w-md animate-fade-in">
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-gray-500 text-sm font-semibold uppercase tracking-wider flex items-center gap-2">
-          <Clock size={14} /> Recent Activities
+          <Clock size={14} /> {t('recent')}
         </h3>
         <button 
           onClick={onClear}
           className="text-xs text-red-400 hover:text-red-600 transition-colors bg-red-50/50 px-2 py-1 rounded"
         >
-          Clear All
+          {t('clearAll')}
         </button>
       </div>
       
@@ -52,7 +53,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
               <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
                 item.noWhatsApp ? 'bg-indigo-50 text-indigo-600' : 'bg-green-50 text-green-600'
               }`}
-              title={item.noWhatsApp ? "Dial regular call" : "Start WhatsApp Chat"}
+              title={item.noWhatsApp ? t('dialCall') : t('startWhatsApp')}
               >
                 {item.noWhatsApp ? <Phone size={15} /> : <MessageCircle size={15} />}
               </div>
@@ -61,7 +62,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
                   <p className="font-mono text-gray-800 text-sm font-medium truncate">{item.number}</p>
                   {item.noWhatsApp && (
                     <span className="text-[9px] bg-amber-50 text-amber-700 border border-amber-200/60 px-1.5 py-0.5 rounded font-semibold whitespace-nowrap">
-                      No WhatsApp
+                      {t('noWhatsApp')}
                     </span>
                   )}
                 </div>
@@ -77,7 +78,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
               <button 
                 onClick={() => onCall(item.number)}
                 className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-slate-50 rounded"
-                title="Call via Phone Dialer"
+                title={t('callDialer')}
               >
                 <Phone size={15} />
               </button>
@@ -90,16 +91,16 @@ const HistoryList: React.FC<HistoryListProps> = ({
                     ? 'text-amber-700 bg-amber-50' 
                     : 'text-gray-400 hover:text-amber-700 hover:bg-amber-50 md:opacity-0 md:group-hover:opacity-100'
                 }`}
-                title={item.noWhatsApp ? "Mark as has WhatsApp" : "Mark as no WhatsApp"}
+                title={item.noWhatsApp ? t('markHasWA') : t('markNoWA')}
               >
-                {item.noWhatsApp ? <PhoneOff size={14} className="inline mr-0.5" /> : "No WA?"}
+                {item.noWhatsApp ? <PhoneOff size={14} className="inline me-0.5" /> : t('noWAShort')}
               </button>
 
               {/* Delete button */}
               <button 
                 onClick={() => onDelete(item.id)}
                 className="p-1.5 text-gray-300 hover:text-red-500 md:opacity-0 md:group-hover:opacity-100 transition-opacity rounded"
-                title="Remove from history"
+                title={t('remove')}
               >
                 <Trash2 size={15} />
               </button>

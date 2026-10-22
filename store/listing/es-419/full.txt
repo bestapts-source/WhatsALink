@@ -1,6 +1,6 @@
 Escribe por WhatsApp a cualquiera sin guardar su número.
 
-WhatsaLink es la forma más rápida de iniciar un chat de WhatsApp con un número que no está en tus contactos. Escribe o pega el número, toca Start Chat y WhatsApp se abre al instante. Se acabó llenar tu agenda de repartidores, arrendadores, compradores y vendedores ocasionales.
+WhatsaLink es la forma más rápida de iniciar un chat de WhatsApp con un número que no está en tus contactos. Escribe o pega el número, toca Iniciar chat y WhatsApp se abre al instante. Se acabó llenar tu agenda de repartidores, arrendadores, compradores y vendedores ocasionales.
 
 POR QUÉ ELEGIR WHATSALINK
 • Chat directo con un toque, sin crear contactos
@@ -18,6 +18,6 @@ Compradores y vendedores en marketplaces, repartidores y taxistas, agentes inmob
 CÓMO FUNCIONA
 1. Escribe o pega un número, o cualquier texto que lo contenga.
 2. Elige un país o déjalo en Auto.
-3. Toca Start Chat. Listo.
+3. Toca Iniciar chat. Listo.
 
 WhatsaLink es una herramienta independiente y no está afiliada, respaldada ni patrocinada por WhatsApp LLC ni Meta. WhatsApp es una marca registrada de su propietario. Necesitas tener WhatsApp instalado para abrir los chats.

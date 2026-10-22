@@ -1,6 +1,6 @@
 Mande mensagem no WhatsApp para qualquer pessoa sem salvar o número.
 
-O WhatsaLink é o jeito mais rápido de iniciar uma conversa no WhatsApp com um número que não está nos seus contatos. Digite ou cole o número, toque em Start Chat e o WhatsApp abre na hora. Chega de encher a agenda com entregadores, locadores, compradores e vendedores de uma vez só.
+O WhatsaLink é o jeito mais rápido de iniciar uma conversa no WhatsApp com um número que não está nos seus contatos. Digite ou cole o número, toque em Iniciar conversa e o WhatsApp abre na hora. Chega de encher a agenda com entregadores, locadores, compradores e vendedores de uma vez só.
 
 POR QUE USAR O WHATSALINK
 • Conversa direta com um toque, sem criar contato
@@ -18,6 +18,6 @@ Quem compra e vende em marketplaces, entregadores e motoristas, corretores de im
 COMO FUNCIONA
 1. Digite ou cole um número, ou qualquer texto que contenha um.
 2. Escolha um país ou deixe em Auto.
-3. Toque em Start Chat. Pronto.
+3. Toque em Iniciar conversa. Pronto.
 
 O WhatsaLink é uma ferramenta independente e não é afiliado, endossado nem patrocinado pelo WhatsApp LLC ou pela Meta. WhatsApp é marca registrada de seu respectivo proprietário. É necessário ter o WhatsApp instalado para abrir as conversas.

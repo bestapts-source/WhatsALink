@@ -1,6 +1,6 @@
 Kirim pesan WhatsApp ke siapa saja tanpa menyimpan nomornya.
 
-WhatsaLink adalah cara tercepat memulai chat WhatsApp dengan nomor yang tidak ada di kontak Anda. Ketik atau tempel nomor, ketuk Start Chat, dan WhatsApp langsung terbuka. Tidak perlu lagi memenuhi daftar kontak dengan kurir, pemilik kos, pembeli, atau penjual yang hanya sekali berurusan.
+WhatsaLink adalah cara tercepat memulai chat WhatsApp dengan nomor yang tidak ada di kontak Anda. Ketik atau tempel nomor, ketuk Mulai Chat, dan WhatsApp langsung terbuka. Tidak perlu lagi memenuhi daftar kontak dengan kurir, pemilik kos, pembeli, atau penjual yang hanya sekali berurusan.
 
 KENAPA PAKAI WHATSALINK
 • Chat langsung dengan satu ketukan, tanpa membuat kontak
@@ -18,6 +18,6 @@ Pembeli dan penjual di marketplace, kurir dan pengemudi ojek atau taksi, agen pr
 CARA KERJA
 1. Ketik atau tempel nomor, atau teks apa pun yang berisi nomor.
 2. Pilih negara atau biarkan Auto.
-3. Ketuk Start Chat. Selesai.
+3. Ketuk Mulai Chat. Selesai.
 
 WhatsaLink adalah alat independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh WhatsApp LLC maupun Meta. WhatsApp adalah merek dagang pemiliknya. WhatsApp harus terpasang untuk membuka chat.

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, Wand2, Eraser, Globe, ClipboardPaste } from 'lucide-react';
 import { Clipboard } from '@capacitor/clipboard';
 import { Capacitor } from '@capacitor/core';
+import { t } from '../src/i18n';
 import { COUNTRY_OPTIONS, detectCountry } from '../utils/phoneUtils';
 
 interface NumberInputProps {
@@ -59,14 +60,14 @@ const NumberInput: React.FC<NumberInputProps> = ({
       if (text) {
         onChange(text);
       } else {
-        if (onPasteError) onPasteError("Clipboard is empty");
+        if (onPasteError) onPasteError(t('clipEmpty'));
       }
     } catch (err) {
       console.error('Failed to read clipboard:', err);
       // Automatically focus the text box so the keyboard pops up and they can paste immediately
       textareaRef.current?.focus();
       if (onPasteError) {
-        onPasteError("Clipboard is locked. Tap and hold inside the box to Paste manually!");
+        onPasteError(t('clipLocked'));
       }
     }
   };
@@ -85,7 +86,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
                onChange={(e) => onCountryCodeChange(e.target.value)}
                className="bg-transparent text-sm font-medium text-gray-600 focus:outline-none cursor-pointer w-full hover:text-green-600 transition-colors"
              >
-               <option value="">Auto / International</option>
+               <option value="">{t('auto')}</option>
                {COUNTRY_OPTIONS.map(c => (
                  <option key={c.code} value={c.code}>
                    {c.flag} {c.name} (+{c.dial})
@@ -105,7 +106,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
               value={value}
               onChange={(e) => onChange(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Paste number here..."
+              dir="auto"
+              placeholder={t('placeholder')}
               className="w-full bg-transparent p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-xl sm:text-2xl font-normal resize-none"
               rows={looksLikeMessyText ? 3 : 1}
               style={{ minHeight: '60px' }}
@@ -120,7 +122,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
                 <button 
                   onClick={() => onChange('')}
                   className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                  title="Clear text"
+                  title={t('clearText')}
                 >
                   <Eraser size={18} />
                 </button>
@@ -133,7 +135,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
               <button 
                 onClick={handlePaste}
                 className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
-                title="Paste from clipboard"
+                title={t('pasteClipboard')}
               >
                 <ClipboardPaste size={20} />
               </button>
@@ -145,7 +147,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
                   className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all bg-purple-100 text-purple-700 hover:bg-purple-200"
                 >
                   <Wand2 size={16} />
-                  Extract
+                  {t('extract')}
                 </button>
               )}
 
@@ -160,8 +162,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
                     : 'bg-gray-300 cursor-not-allowed'}
                 `}
               >
-                <span>Start Chat</span>
-                <Send size={16} className={isValidish ? "ml-1" : ""} />
+                <span>{t('startChat')}</span>
+                <Send size={16} className={`rtl:-scale-x-100 ${isValidish ? "ms-1" : ""}`} />
               </button>
             </div>
           </div>
@@ -171,9 +173,9 @@ const NumberInput: React.FC<NumberInputProps> = ({
       {/* Helper text */}
       <div className="mt-3 flex justify-between text-xs text-gray-400 px-2">
          <span>
-           {selectedOption ? `Prefix +${selectedOption.dial} applied` : "Auto-detecting country"}
+           {selectedOption ? t('prefixApplied', { dial: selectedOption.dial }) : t('autoDetecting')}
          </span>
-         {cleanNumber.length > 0 && <span>{cleanNumber.length} digits</span>}
+         {cleanNumber.length > 0 && <span>{t('digits', { n: cleanNumber.length })}</span>}
       </div>
     </div>
   );
