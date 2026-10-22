@@ -3,14 +3,12 @@ import { MessageCircle, ExternalLink, Info, AlertCircle, RotateCcw, X, Download 
 import NumberInput from './components/NumberInput';
 import HistoryList from './components/HistoryList';
 import { HistoryItem } from './types';
-import { extractPhoneNumber } from './services/geminiService';
-import { formatPhoneNumber } from './utils/phoneUtils';
+import { extractPhoneNumber, formatPhoneNumber } from './utils/phoneUtils';
 
 const App: React.FC = () => {
   const [text, setText] = useState('');
   const [countryCode, setCountryCode] = useState(''); // Default to Auto
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [isAiLoading, setIsAiLoading] = useState(false);
   const [notification, setNotification] = useState<{msg: string, type: 'error' | 'success'} | null>(null);
   
   // Undo state
@@ -121,19 +119,15 @@ const App: React.FC = () => {
     }
   };
 
-  const handleAiExtract = async () => {
-    setIsAiLoading(true);
-    const result = await extractPhoneNumber(text);
-    setIsAiLoading(false);
+  const handleExtract = () => {
+    const result = extractPhoneNumber(text, countryCode);
 
-    if (result && result.phoneNumber) {
-      setCountryCode(''); 
-      setText(result.phoneNumber);
+    if (result) {
+      setCountryCode('');
+      setText('+' + result);
       showNotification("Number extracted successfully!", 'success');
     } else {
-      // If result is null, it could be no number found OR missing API key.
-      // We keep the message generic but helpful.
-      showNotification("Could not find a valid number or AI unavailable.", 'error');
+      showNotification("Could not find a valid number in this text.", 'error');
     }
   };
 
@@ -238,7 +232,7 @@ const App: React.FC = () => {
           <p className="text-gray-600 text-sm">
             Chat on WhatsApp without saving contacts.
             <br/>
-            <span className="text-xs text-gray-500 font-medium">Supports international numbers & Israeli 05 format.</span>
+            <span className="text-xs text-gray-500 font-medium">Works with phone numbers from any country.</span>
           </p>
         </div>
 
@@ -249,8 +243,7 @@ const App: React.FC = () => {
           onCountryCodeChange={setCountryCode}
           onChange={setText} 
           onSubmit={() => handleStartChat()} 
-          onAiExtract={handleAiExtract}
-          isAiLoading={isAiLoading}
+          onExtract={handleExtract}
           onPasteError={(msg) => showNotification(msg, 'error')}
         />
 
@@ -282,7 +275,7 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="font-semibold text-gray-800 pr-5">Direct Chat</h3>
                   <p className="text-xs text-gray-500 pr-4 leading-relaxed">
-                    Type a number. Starts with 05? We'll add +972 automatically. Or pick a country code.
+                    Type a number with its country code (+44, +1, +972...) or pick a country and type it locally.
                   </p>
                </div>
              )}
@@ -302,7 +295,7 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="font-semibold text-gray-800 pr-5">Smart Paste</h3>
                   <p className="text-xs text-gray-500 pr-4 leading-relaxed">
-                    Paste messy text or email signatures. Our AI will extract the number for you.
+                    Paste messy text or email signatures. We'll find the number for you.
                   </p>
                </div>
              )}

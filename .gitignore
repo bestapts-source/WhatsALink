@@ -37,3 +37,4 @@ android/app/build/
 android/build/
 android/capacitor-cordova-android-plugins/
 .antigravity/
+android/keystore.properties

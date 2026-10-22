@@ -15,40 +15,6 @@
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json" />
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: { sans: ['Inter', 'sans-serif'] },
-            colors: {
-              whatsapp: { light: '#25D366', dark: '#075E54', bg: '#E5DDD5' }
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.3s ease-out forwards',
-              'slide-up': 'slideUp 0.3s ease-out forwards',
-            },
-            keyframes: {
-              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-              slideUp: { '0%': { transform: 'translateY(100%)' }, '100%': { transform: 'translateY(0)' } }
-            }
-          },
-        },
-      }
-    </script>
-
-    <style>
-      body { background-color: #E5DDD5; -webkit-tap-highlight-color: transparent; }
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
 </head>
 <body>
     <div id="root"></div>

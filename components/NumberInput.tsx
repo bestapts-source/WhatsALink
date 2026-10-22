@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Wand2, Loader2, Eraser, Globe, ClipboardPaste } from 'lucide-react';
+import { Send, Wand2, Eraser, Globe, ClipboardPaste } from 'lucide-react';
 import { Clipboard } from '@capacitor/clipboard';
 import { Capacitor } from '@capacitor/core';
+import { COUNTRY_OPTIONS, detectCountry } from '../utils/phoneUtils';
 
 interface NumberInputProps {
   value: string;
@@ -9,22 +10,9 @@ interface NumberInputProps {
   onCountryCodeChange: (code: string) => void;
   onChange: (val: string) => void;
   onSubmit: () => void;
-  onAiExtract: () => void;
-  isAiLoading: boolean;
+  onExtract: () => void;
   onPasteError?: (msg: string) => void;
 }
-
-const COUNTRY_CODES = [
-  { code: "", label: "Auto / Int'l", flag: "🌐" },
-  { code: "972", label: "Israel (+972)", flag: "🇮🇱" },
-  { code: "1", label: "USA/Can (+1)", flag: "🇺🇸" },
-  { code: "44", label: "UK (+44)", flag: "🇬🇧" },
-  { code: "91", label: "India (+91)", flag: "🇮🇳" },
-  { code: "49", label: "Germany (+49)", flag: "🇩🇪" },
-  { code: "33", label: "France (+33)", flag: "🇫🇷" },
-  { code: "55", label: "Brazil (+55)", flag: "🇧🇷" },
-  { code: "7", label: "Russia (+7)", flag: "🇷🇺" },
-];
 
 const NumberInput: React.FC<NumberInputProps> = ({ 
   value, 
@@ -32,8 +20,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
   onCountryCodeChange,
   onChange, 
   onSubmit, 
-  onAiExtract,
-  isAiLoading,
+  onExtract,
   onPasteError
 }) => {
   const [cleanNumber, setCleanNumber] = useState('');
@@ -47,14 +34,15 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const isValidish = cleanNumber.length >= 5; // Basic validation
   const looksLikeMessyText = value.length > 20 || (value.includes(' ') && value.length > 10 && !value.startsWith('+'));
   
-  // Check if the current input triggers the Israeli 05 heuristic
-  const isIsraeli05 = value.replace(/\D/g, '').startsWith('05');
+  const detected = countryCode === '' ? detectCountry(value) : undefined;
+  const detectedOption = detected ? COUNTRY_OPTIONS.find(c => c.code === detected) : undefined;
+  const selectedOption = COUNTRY_OPTIONS.find(c => c.code === countryCode);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault(); // Prevent newline in textarea
       if (isValidish) onSubmit();
-      else if (looksLikeMessyText) onAiExtract();
+      else if (looksLikeMessyText) onExtract();
     }
   };
 
@@ -97,15 +85,16 @@ const NumberInput: React.FC<NumberInputProps> = ({
                onChange={(e) => onCountryCodeChange(e.target.value)}
                className="bg-transparent text-sm font-medium text-gray-600 focus:outline-none cursor-pointer w-full hover:text-green-600 transition-colors"
              >
-               {COUNTRY_CODES.map(c => (
+               <option value="">🌐 Auto / International</option>
+               {COUNTRY_OPTIONS.map(c => (
                  <option key={c.code} value={c.code}>
-                   {c.flag} {c.label}
+                   {c.flag} {c.name} (+{c.dial})
                  </option>
                ))}
              </select>
-             {isIsraeli05 && countryCode === "" && (
-               <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full whitespace-nowrap font-medium animate-pulse">
-                 🇮🇱 05 Detected
+             {detectedOption && (
+               <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full whitespace-nowrap font-medium">
+                 {detectedOption.flag} {detectedOption.name}
                </span>
              )}
           </div>
@@ -149,20 +138,14 @@ const NumberInput: React.FC<NumberInputProps> = ({
                 <ClipboardPaste size={20} />
               </button>
 
-              {/* AI Extraction Button */}
+              {/* Extract number from messy text */}
               {looksLikeMessyText && (
                 <button
-                  onClick={onAiExtract}
-                  disabled={isAiLoading}
-                  className={`
-                    flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all
-                    ${isAiLoading 
-                      ? 'bg-purple-100 text-purple-400 cursor-not-allowed' 
-                      : 'bg-purple-100 text-purple-700 hover:bg-purple-200'}
-                  `}
+                  onClick={onExtract}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all bg-purple-100 text-purple-700 hover:bg-purple-200"
                 >
-                  {isAiLoading ? <Loader2 size={16} className="animate-spin" /> : <Wand2 size={16} />}
-                  {isAiLoading ? 'Extracting...' : 'Magic Extract'}
+                  <Wand2 size={16} />
+                  Extract Number
                 </button>
               )}
 
@@ -188,7 +171,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
       {/* Helper text */}
       <div className="mt-3 flex justify-between text-xs text-gray-400 px-2">
          <span>
-           {countryCode ? `Prefix +${countryCode} applied` : "Auto-detecting country"}
+           {selectedOption ? `Prefix +${selectedOption.dial} applied` : "Auto-detecting country"}
          </span>
          {cleanNumber.length > 0 && <span>{cleanNumber.length} digits</span>}
       </div>
