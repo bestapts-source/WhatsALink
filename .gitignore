@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Secrets and signing
+.env
+.env.*
+keystore-credentials.txt
+*.keystore
+*.jks
+
+# Android local
+android/local.properties
+android/.gradle/
+android/app/build/
+android/build/
+android/capacitor-cordova-android-plugins/
+.antigravity/

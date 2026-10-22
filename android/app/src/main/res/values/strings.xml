@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">WhatsaLink</string>
+    <string name="title_activity_main">WhatsaLink</string>
+    <string name="package_name">com.whatsalink.app</string>
+    <string name="custom_url_scheme">com.whatsalink.app</string>
+</resources>

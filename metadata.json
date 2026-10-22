@@ -1,10 +1,1 @@
-{
-  "name": "WhatsaLink",
-  "description": "Instantly start WhatsApp chats with unsaved numbers. Features AI-powered number extraction from messy text.",
-  "requestFramePermissions": [
-    "clipboard-read"
-  ],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}
+{"name":"Copy of WhatsaLink","description":"Instantly start WhatsApp chats with unsaved numbers. Features AI-powered number extraction from messy text.","requestFramePermissions":["clipboard-read"],"majorCapabilities":["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]}

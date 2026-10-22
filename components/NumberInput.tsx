@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Send, Wand2, Loader2, Eraser, Globe, ClipboardPaste } from 'lucide-react';
+import { Clipboard } from '@capacitor/clipboard';
+import { Capacitor } from '@capacitor/core';
 
 interface NumberInputProps {
   value: string;
@@ -58,7 +60,14 @@ const NumberInput: React.FC<NumberInputProps> = ({
 
   const handlePaste = async () => {
     try {
-      const text = await navigator.clipboard.readText();
+      let text = '';
+      if (Capacitor.isNativePlatform()) {
+        const { value } = await Clipboard.read();
+        text = value ?? '';
+      } else {
+        text = await navigator.clipboard.readText();
+      }
+      
       if (text) {
         onChange(text);
       } else {
@@ -107,8 +116,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
               value={value}
               onChange={(e) => onChange(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Paste number here (e.g. 0501234567)"
-              className="w-full bg-transparent p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-sm sm:text-base font-normal resize-none"
+              placeholder="Paste number here..."
+              className="w-full bg-transparent p-4 text-gray-800 placeholder-gray-400 focus:outline-none text-xl sm:text-2xl font-normal resize-none"
               rows={looksLikeMessyText ? 3 : 1}
               style={{ minHeight: '60px' }}
             />
