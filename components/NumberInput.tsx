@@ -85,7 +85,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
                onChange={(e) => onCountryCodeChange(e.target.value)}
                className="bg-transparent text-sm font-medium text-gray-600 focus:outline-none cursor-pointer w-full hover:text-green-600 transition-colors"
              >
-               <option value="">🌐 Auto / International</option>
+               <option value="">Auto / International</option>
                {COUNTRY_OPTIONS.map(c => (
                  <option key={c.code} value={c.code}>
                    {c.flag} {c.name} (+{c.dial})
@@ -94,7 +94,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
              </select>
              {detectedOption && (
                <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full whitespace-nowrap font-medium">
-                 {detectedOption.flag} {detectedOption.name}
+                 {detectedOption.name}
                </span>
              )}
           </div>
@@ -128,7 +128,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
             </div>
 
             {/* Right Actions (Main Call to Actions) */}
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-1 items-center">
               
               <button 
                 onClick={handlePaste}
@@ -142,10 +142,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
               {looksLikeMessyText && (
                 <button
                   onClick={onExtract}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all bg-purple-100 text-purple-700 hover:bg-purple-200"
+                  className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all bg-purple-100 text-purple-700 hover:bg-purple-200"
                 >
                   <Wand2 size={16} />
-                  Extract Number
+                  Extract
                 </button>
               )}
 
@@ -154,7 +154,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
                 onClick={onSubmit}
                 disabled={!isValidish}
                 className={`
-                  flex items-center gap-2 px-6 py-2 rounded-lg font-bold text-white shadow-md transition-all
+                  flex items-center gap-1.5 px-4 py-2 rounded-lg font-bold text-white shadow-md whitespace-nowrap transition-all
                   ${isValidish 
                     ? 'bg-[#25D366] hover:bg-[#20bd5a] hover:shadow-lg transform hover:-translate-y-0.5' 
                     : 'bg-gray-300 cursor-not-allowed'}

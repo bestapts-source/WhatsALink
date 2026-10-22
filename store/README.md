@@ -34,3 +34,7 @@ Policy reminders: no "#1/best" claims, no emoji spam, no keyword stuffing, and t
 ## Release file
 `android/app/build/outputs/bundle/release/app-release.aab` (rebuild: `npm run build && npx cap sync android && cd android && ./gradlew bundleRelease`, JAVA_HOME = Android Studio's `jbr`).
 Enable Play App Signing when prompted; keep the upload keystore backed up.
+
+## Graphics (`store/graphics/`)
+- `feature-graphic-1024x500.jpg` — Play feature graphic (1024x500, JPEG, no alpha).
+- `phone-1-start.jpg`, `phone-2-international.jpg`, `phone-3-extract.jpg`, `phone-4-history.jpg` — phone screenshots, 1080x1920 (9:16), English UI. Retake for other locales after the UI is translated.
